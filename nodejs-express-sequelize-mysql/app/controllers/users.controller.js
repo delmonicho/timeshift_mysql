@@ -61,10 +61,11 @@ exports.findAll = (req, res) => {
       return Object.assign(
         {},
         {
-          user_id: user.id,
+          userId: user.id,
           first_name: user.first_name,
           last_name: user.last_name,
           email: user.email,
+          username: user.username,
           password: user.password,
           lists: user.lists.map(list => {
 
@@ -72,23 +73,21 @@ exports.findAll = (req, res) => {
             return Object.assign(
               {},
               {
-                list_id: list.id,
+                listId: list.id,
                 title: list.title,
                 color: list.color,
-                tasks: list.tasks,
-                shared_users: list.shared_users,
+                userId: list.userId,
                 tasks: list.tasks.map(task => {
 
                   //tidy up the tasks data
                   return Object.assign(
                     {},
                     {
-                      task_id: task.id,
+                      taskId: task.id,
                       title: task.title,
                       est_time: task.est_time,
                       alg_time: task.alg_time,
-                      list_id: task.list_id
-
+                      listId: task.listId
                     }
                   )
                 })
