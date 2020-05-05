@@ -89,7 +89,8 @@ export default {
       taskTimes:'',           //string to hold dateTime
       isButtonDisabled:false, //bool to check if input forms in process of editing
       consent:true,            //bool to check if user satisfied with task filling,
-      //newUser:true
+      listCount:0,
+      //newTask: []
     };
   },
   async beforeMount() {
@@ -162,17 +163,21 @@ export default {
         //create list when first task added
         if (this.todos.length == 0) {
           await this.createList();
+          this.listCount++;
         }
 
         //add todo to array
+        let newTitle = this.input;
+        let newHours = this.hours;
+        let newListIdNum = this.listCount;
         this.todos.push([this.input,this.hours]);
         //set tasks to save state of todo
         this.$store.commit("setTasks", this.todos);
         //create task
-        // let title = this.input;
-        // let hours = this.hours;
-        // let newTask = {title,hours};
-        // await this.createTask(newTask);
+        //console.log("hours:" + hours + " typeof hours = " + typeof hours + "  listIdNum:" + listIdNum + typeof listIdNum);
+        //let newTask = [title,hours,listIdNum];
+        console.log("newTask: " + newTitle + " " + newHours + " " + newListIdNum);
+        await this.createTask(newTitle, newHours,newListIdNum);
         //clear input forms
         this.input = "";
         this.hours = "";
@@ -208,7 +213,7 @@ export default {
             .add({hours:parseHour,minutes:parseMinutes})
             .format("YYYY-MM-DD HH:mm:ss");
 
-          //console.log("start =" + start + "\tend " + end);
+
           let title = task[0];
           //fill array to display task time designations/ reorder events
           this.algTodosTimes.push([title,start,end]);
@@ -217,7 +222,7 @@ export default {
           //add event to calendar
           this.calendarEvent = { start, end, title };
           await this.addCalendar(this.calendarEvent);
-          //console.log(this.calendarEvent);
+
 
           //reverse back to maintain order
           this.todos.reverse();
@@ -246,7 +251,7 @@ export default {
             this.consent = true;   //user happy with distribution of tasks
 
             //TODO set flag for new list creation when list emptied
-            // TODO increment counter for list id
+            //TODO increment counter for list id
 
             // for (var k=0; k < this.algTodosTimes.length; k++)
             // {

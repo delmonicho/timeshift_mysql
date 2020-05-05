@@ -20,7 +20,7 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 // Models/Tables
-db.blocks = require("./blocks.model.js")(sequelize, Sequelize);
+//db.blocks = require("./blocks.model.js")(sequelize, Sequelize);
 db.users = require("./users.model.js")(sequelize, Sequelize);
 db.events = require("./events.model.js")(sequelize, Sequelize);
 db.lists = require("./lists.model.js")(sequelize, Sequelize);

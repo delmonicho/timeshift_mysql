@@ -45,15 +45,18 @@ export const requestsMixin = {
       console.log("List " + list['title'] + " posted in db.");
       return http.post(`/lists`, list);
     },
-    createTask(data) {
-      let { title, est_time} = data;
-      task.title = title;
-      task.est_time = est_time;
-      console.log("Task " + task['title'] + " added to list and posted in db.");
+    createTask(newTitle,newHours,newListIdNum) {
+
+      console.log(newTitle + "  " + newHours + "  " + newListIdNum);
+      task.title = newTitle;
+      task.est_time = newHours;
+      task.alg_time = newHours + Math.random() * 5;
+      task.listId = newListIdNum;
+      console.log(task['title'] + " added to task list and posted in db.");
+      console.log(task);
       return http.post(`/tasks`, task);
     },
     getCalendar() {
-      //console.log("getCalendar(): ");
       return http.get(`/events`);
     },
     addCalendar(data) {
@@ -65,7 +68,6 @@ export const requestsMixin = {
       event.start_time = start;
       event.end_time = end;
       //try to subtract 10 hours to get proper timezone with UTC
-      //console.log("addCal: start =" + event.start_time);
       return http.post(`/events`, event);
     },
     editCalendar(data) {

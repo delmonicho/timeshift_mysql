@@ -2,7 +2,7 @@ module.exports = {
   HOST: "localhost",
   USER: "root",
   PASSWORD: "MySQL350!",
-  DB: "tutorials",
+  DB: "timeshift_mysql",
   dialect: "mysql",
   pool: {
     max: 5,

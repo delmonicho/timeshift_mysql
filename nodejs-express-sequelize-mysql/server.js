@@ -30,7 +30,7 @@ app.get("/", (req, res) => {
 
 
 //include routes before listen
-require("./app/routes/blocks.routes")(app);
+//require("./app/routes/blocks.routes")(app);
 require("./app/routes/users.routes")(app);
 require("./app/routes/tasks.routes")(app);
 require("./app/routes/lists.routes")(app);
